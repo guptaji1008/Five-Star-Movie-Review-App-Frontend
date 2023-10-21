@@ -14,6 +14,7 @@ export default function EmailVerification({toast}) {
 
   const [otp, setOtp] = useState(new Array(OTP_LENGTH).fill(''))
   const [activeOtpIndex, setActiveOtpIndex] = useState(0)
+  const [busy, setBusy] = useState(false)
 
   const { isAuth, authInfo } = useAuth()
   const { isLoggedIn, profile } = authInfo
@@ -82,15 +83,19 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!isValidOtp(otp)) return toast.error("Invalid OTP!")
-
+    setBusy(true)
+    if (!isValidOtp(otp)) {
+      setBusy(false)
+      return toast.error("Invalid OTP!")
+    }
     // Submit Otp : 
     const response = await verifyUserEmail({OTP: otp.join(""), userId: user.id})
+    setBusy(false)
     if (response.error) return toast.error(response.error)
     toast.success(response.message)
 
     localStorage.setItem("auth-token", response.user.token)
-    await isAuth()
+    isAuth()
   }
 
   const resendOtpButton = async () => {
@@ -129,7 +134,7 @@ useEffect(() => {
               })
             }
           </div>
-          <Submit value="Verify Email" />
+          <Submit value="Verify Email" busy={busy} />
           <button type='button' onClick={resendOtpButton} className='dark:text-white text-blue-600 hover:underline w-full text-center'>Resend OTP</button>
         </form>
       </Container>

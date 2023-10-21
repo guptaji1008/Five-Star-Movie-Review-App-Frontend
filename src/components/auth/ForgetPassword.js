@@ -10,6 +10,7 @@ import { forgotPassword } from "../../api/auth";
 
 export default function ForgetPassword({toast}) {
   const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false)
 
   const isValidEmail = (email) => {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) return false
@@ -19,10 +20,14 @@ export default function ForgetPassword({toast}) {
   const handleSubmit = async (e) => {
 
     e.preventDefault()
+    setBusy(true)
 
-    if (!isValidEmail(email)) return toast.error("Invalid Email!")
-
+    if (!isValidEmail(email)) {
+      setBusy(false)
+      return toast.error("Invalid Email!")
+    }
     const { error, message } = await forgotPassword(email)
+    setBusy(false)
 
     if (error) return toast.error(error)
     
@@ -43,7 +48,7 @@ export default function ForgetPassword({toast}) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Submit value="Send Link" />
+          <Submit value="Send Link" busy={busy} />
           <div className="flex justify-between">
             <CustomLink to="/auth/signin">Sign In</CustomLink>
             <CustomLink to="/auth/signup">Sign Up</CustomLink>

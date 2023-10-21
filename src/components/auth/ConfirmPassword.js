@@ -12,6 +12,7 @@ import { resetPassword, verifyPasswordResetToken } from '../../api/auth'
 export default function ConfirmPassword({toast}) {
 
   const navigate = useNavigate()
+  const [busy, setBusy] = useState(false)
 
   const [isVerifying, setIsVerifying] = useState(true)
   const [isValid, setIsValid] = useState(true)
@@ -66,12 +67,15 @@ export default function ConfirmPassword({toast}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setBusy(true)
     const { status, error } = isValidPassword(newPassword, confirmPassword)
 
-    if (!status) return toast.error(error)
-
+    if (!status) {
+      setBusy(false)
+      return toast.error(error)
+    }
     const { error: errorMessage, message } = await resetPassword({ newPassword, userId: id, token })
-
+    setBusy(false)
     if (errorMessage) return toast.error(errorMessage)
     toast.success(message)
     setTimeout(() => {
@@ -105,7 +109,7 @@ export default function ConfirmPassword({toast}) {
           <Title>Enter New Password</Title>
           <FormInput className="mb-5" name="newPassword" value={newPassword} onChange={handleChange} label="Password : " placeholder="********" type="password" />
           <FormInput className="mb-5" name="confirmPassword" value={confirmPassword} onChange={handleChange} label="Confirm Password : " placeholder="John@123" type="text" />
-          <Submit value="Reset Password" />
+          <Submit value="Reset Password" busy={busy}  />
         </form>
       </Container>
     </FormContainer>

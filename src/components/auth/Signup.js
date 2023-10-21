@@ -16,6 +16,7 @@ export default function Signup({toast}) {
   
   const { authInfo } = useAuth()
   const { isLoggedIn } = authInfo
+  const [busy, setBusy] = useState(false)
 
   useEffect(() => {
     if(isLoggedIn) return navigate('/')
@@ -50,10 +51,15 @@ export default function Signup({toast}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setBusy(true)
     const {ok, error} = validUserId(userInfo)
-    if(!ok) return toast.error(error)
+    if(!ok) {
+      setBusy(false)
+      return toast.error(error)
+    }
     
     const response = await createUser(userInfo)
+    setBusy(false)
     if (response.error) return toast.error(response.error)
     navigate('/auth/emailverification', {
       state: {user: response.user, through: "login"},
@@ -90,10 +96,10 @@ export default function Signup({toast}) {
             value={password}
             onChange={handleChange}
           />
-          <Submit value="Submit" />
+          <Submit busy={busy} value="Submit" />
           <div className="flex justify-center">
             <span className="dark:text-dark-subtle text-light-subtle">
-              Have an account?{" "}
+              Have an account?
               <CustomLink to="/auth/signin" className="underline">
                 Sign In
               </CustomLink>
