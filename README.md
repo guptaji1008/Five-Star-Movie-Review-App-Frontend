@@ -1,5 +1,5 @@
 
-# 5 Star MRP  - Movie Review App
+# 5 Star MRP  - Movie Review App (Frontend)
 
 This is a simple Movie review app where you can rate and comment on the Movie by watching trailer. This project is a full MERN stack project. 
 
