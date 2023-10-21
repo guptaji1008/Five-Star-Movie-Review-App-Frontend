@@ -20,5 +20,9 @@ export default function TopRatedMovies({toast}) {
     }
   }, [])
 
+  if (!movies.length) return <div className="flex justify-center items-center">
+  <p className="dark:text-white text-primary opacity-70 text-2xl"> <ImSpinner className="animate-spin" /> </p>
+</div>
+
   return <MovieList movies={movies} title="Viewers choice (Movies)" />
 }

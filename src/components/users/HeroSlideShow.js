@@ -107,6 +107,10 @@ export default function HeroSlideShow({ toast }) {
     navigate('/movie/' + id)
   }
 
+  if (!slides.length) return <div className="flex justify-center items-center">
+    <p className="dark:text-white text-primary opacity-70 text-2xl"> <ImSpinner className="animate-spin" /> </p>
+  </div>
+
   return (
     <div className="w-full flex justify-center pt-5 space-x-4">
       {/* Slide Show Section */}
