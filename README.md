@@ -1,70 +1,38 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 5 Star MRP  - Movie Review App
 
-## Available Scripts
+This is a simple Movie review app where you can rate and comment on the Movie by watching trailer. This project is a full MERN stack project. 
 
-In the project directory, you can run:
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Basically, I was searching a project where I can furnish my MERN (Mongodb, Express, React, Node) knowledge and I got a project on udemy where the project was on making a movie review app using MERN. This is my first full stack project where I have learnt many things and lots of thing which I usually think that how this things are made when I watch any other application like creating a proper login, signup and authentications, liveSearch with recommendations, slider shows and many more. My real aim was to learn that how big projects are made, how to manage files, how to "NOT REPEAT YOURSELF" in programming and lastly to gain some experience. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. axios 1.5.1
+2. react 18.2.0,
+3. react-drag-drop-files 2.3.10
+4. react-icons 4.11.0
+5. react-router-dom 6.16.0
+6. react-toastify 9.1.3
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Status
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The application is almost ready to use. There are some some correction that is still required, but that will not effect the user experience. Basically Iam working on how to better user experience, although basic structure of the application is ready. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## IMPORTANT
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Since I have added a functionality of email verification where after signup, there ia a process of you email verification. The only problem is that I have used "Mail-Trap" website for my OTP verification or any other thing ie done through email, will be recieved on Mail-Trap. I have not used original email sending because every website requires my own server and domain which currently Iam unable to buy because of it is costing me too much. 
+It is my humble request to all the users that if you want to take a look up in the application, then please use the following email-Id and password and please don't test forgot password because for that also link for reseting password will go to the Mail-Trap.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+admin:-
+email: aman@gmail.com,
+password: 123456789
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+user:-
+email: ashutosh@gmail.com,
+password: 123456789
