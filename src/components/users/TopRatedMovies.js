@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { getTopRatedMovies } from '../../api/movie'
 import MovieList from './MovieList'
-import { ImSpinner } from 'react-icons/im'
 
-export default function TopRatedMovies({toast}) {
+export default function TopRatedMovies({toast, load}) {
 
   const [movies, setMovies] = useState([])
 
@@ -21,9 +20,9 @@ export default function TopRatedMovies({toast}) {
     }
   }, [])
 
-  if (!movies.length) return <div className="flex justify-center items-center">
-  <p className="dark:text-white text-primary opacity-70 text-2xl"> <ImSpinner className="animate-spin" /> </p>
-</div>
+  useEffect(() => {
+    if (movies.length) load(true)
+  }, [movies.length])
 
   return <MovieList movies={movies} title="Viewers choice (Movies)" />
 }
