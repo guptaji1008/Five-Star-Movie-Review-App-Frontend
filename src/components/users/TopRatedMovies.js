@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getTopRatedMovies } from '../../api/movie'
 import MovieList from './MovieList'
+import { ImSpinner } from 'react-icons/im'
 
 export default function TopRatedMovies({toast}) {
 

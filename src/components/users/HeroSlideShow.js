@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getLatestUploads } from "../../api/movie";
 import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { ImSpinner } from "react-icons/im";
 
 let intervalId;
 let count = 0
