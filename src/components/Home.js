@@ -30,8 +30,8 @@ export default function Home({toast}) {
     navigate("/auth/emailverification", { state: { user: authInfo.profile, through: "verify" } })
   }
 
-  if (!load && !slideLoad) return <div className='dark:bg-primary items-center bg-white min-h-screen'>
-    <p className='text-center py-10 text-5xl'> <ImSpinner className='animate-spin' /> </p>
+  if (!load && !slideLoad) return <div className='dark:bg-primary items-center justify-center bg-white min-h-screen'>
+    <p className='text-center dark:text-white text-primary py-10 text-5xl'> <ImSpinner className='animate-spin' /> </p>
   </div>
 
   return (
