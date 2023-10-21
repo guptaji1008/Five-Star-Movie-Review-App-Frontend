@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getTopRatedMovies } from '../../api/movie'
 import MovieList from './MovieList'
 
-export default function TopRatedMovies({toast, load}) {
+export default function TopRatedMovies({toast}) {
 
   const [movies, setMovies] = useState([])
 
@@ -19,10 +19,6 @@ export default function TopRatedMovies({toast, load}) {
       ac.abort()
     }
   }, [])
-
-  useEffect(() => {
-    if (movies.length) load(true)
-  }, [movies.length])
 
   return <MovieList movies={movies} title="Viewers choice (Movies)" />
 }

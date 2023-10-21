@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useAuth } from '../hooks'
 import Container from './Container'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TopRatedMovies from './users/TopRatedMovies'
 import HeroSlideShow from './users/HeroSlideShow'
-import { ImSpinner } from 'react-icons/im'
 
 export default function Home({toast}) {
 
   const { authInfo } = useAuth()
   const { isLoggedIn } = authInfo
   const isVerified = authInfo.profile?.isVerified
-  const [load, setLoad] = useState(false)
-  const [slideLoad, setSlideLoad] = useState(false)
 
   const navigate = useNavigate()
   const { state } = useLocation()
@@ -30,10 +27,6 @@ export default function Home({toast}) {
     navigate("/auth/emailverification", { state: { user: authInfo.profile, through: "verify" } })
   }
 
-  if (!load && !slideLoad) return <div className='dark:bg-primary items-center justify-center bg-white min-h-screen'>
-    <p className='text-center dark:text-white text-primary py-10 text-5xl'> <ImSpinner className='animate-spin' /> </p>
-  </div>
-
   return (
     <div className='dark:bg-primary bg-white min-h-screen'>
       <Container>
@@ -44,9 +37,9 @@ export default function Home({toast}) {
         }
         <div>
           {/* slider */}
-          <HeroSlideShow toast={toast} slideLoad={setSlideLoad}  />
+          <HeroSlideShow toast={toast} />
           {/* Most Rated Movies */}
-          <TopRatedMovies toast={toast} load={setLoad} />
+          <TopRatedMovies toast={toast} />
         </div>
       </Container>
     </div>

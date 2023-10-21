@@ -8,7 +8,7 @@ let intervalId;
 let count = 0
 let newTime = 0
 let lastTime = 0
-export default function HeroSlideShow({ toast, slideLoad }) {
+export default function HeroSlideShow({ toast }) {
   const [currentSlide, setCurrentSlide] = useState({});
   const [clonedSlide, setClonedSlide] = useState({});
   const [slides, setSlides] = useState([]);
@@ -100,7 +100,6 @@ export default function HeroSlideShow({ toast, slideLoad }) {
 
   useEffect(() => {
     if (slides.length && visible) {
-      slideLoad(true)
       startSlideShow();
     } else pauseSlideShow();
   }, [slides.length, visible]);
@@ -108,6 +107,10 @@ export default function HeroSlideShow({ toast, slideLoad }) {
   const naviagateSingleMovie = (id) => {
     navigate('/movie/' + id)
   }
+
+  if (!slides.length) return <div className="flex justify-center">
+  <p className='text-center dark:text-white text-primary py-10 text-5xl'> <ImSpinner className='animate-spin' /> </p>
+</div>
 
   return (
     <div className="w-full flex justify-center pt-5 space-x-4">
