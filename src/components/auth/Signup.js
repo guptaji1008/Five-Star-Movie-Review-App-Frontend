@@ -18,19 +18,20 @@ export default function Signup({toast}) {
   const { isLoggedIn } = authInfo
   const [busy, setBusy] = useState(false)
 
+  // when user is loggedin then redirected to home page
   useEffect(() => {
     if(isLoggedIn) return navigate('/')
   }, [isLoggedIn])
 
 
-
+  // created a state userInfo (an object)
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-
+  // validation of email, password and name :
   const validUserId = ({name, email, password}) => {
     if (!name.trim()) return {ok: false, error: "Name is missing"}
     if (!/^[a-z A-Z]+$/.test(name)) return {ok: false, error: "Invalid Name"}
@@ -49,6 +50,7 @@ export default function Signup({toast}) {
     setUserInfo({...userInfo, [name]: value})
   }
 
+  // submitting form :
   const handleSubmit = async (e) => {
     e.preventDefault()
     setBusy(true)

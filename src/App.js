@@ -21,6 +21,7 @@ export default function App() {
 
   const isAdmin = authInfo.profile?.role === "admin"
 
+  // if role in profile is admin, then it will transfer to AdminNavigator
   if (isAdmin) return <AdminNavigator toast={toast}/>
 
   return (

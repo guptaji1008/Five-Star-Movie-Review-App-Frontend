@@ -6,6 +6,7 @@ import { useMovies } from "../../hooks";
 
 export default function Movies({toast}) {
 
+  // destructuring movies, fetchMovie, fetchNextPage, fetchPrevPage
   const { movies, fetchMovie, fetchNextPage, fetchPrevPage } = useMovies()
   useEffect(() => {
     fetchMovie()

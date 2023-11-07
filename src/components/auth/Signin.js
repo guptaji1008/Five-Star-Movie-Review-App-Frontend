@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Container from '../Container'
 import Title from '../form/Title'
 import FormInput from '../form/FormInput'
@@ -7,16 +7,13 @@ import CustomLink from '../CustomLink'
 import FormContainer from '../form/FormContainer'
 import { commonFormClasses } from '../../utils/theme'
 import { useAuth } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
 
 export default function Signin({toast}) {
-
-  const navigate = useNavigate()
 
   const { handleLogin, authInfo } = useAuth()
   const { isPending } = authInfo
 
-
+  // creating a state of email, password
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -25,6 +22,7 @@ export default function Signin({toast}) {
 
   const { email, password } = userInfo;
 
+  // validation process of email, password
   const validUserId = ({email, password}) => {
     if (!email.trim()) return {ok: false, error: "Email is missing"}
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) return {ok: false, error: "Invalid email"}
@@ -58,6 +56,7 @@ export default function Signin({toast}) {
           <FormInput value={password} onChange={handleChange} name="password" label="Password : " placeholder="*********" type="password"/>
           <Submit value="Submit" busy={isPending}/>
           <div className="flex justify-between">
+            {/* CustomLinks are the link with some customization */}
             <CustomLink to="/auth/forgetpassword">Forgot Password</CustomLink>
             <CustomLink to="/auth/signup">Sign Up</CustomLink>
           </div>

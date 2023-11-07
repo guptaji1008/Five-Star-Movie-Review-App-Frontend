@@ -15,7 +15,9 @@ export default function AdminNavigator({toast}) {
 
   const { resetSearch } = useSearch()
 
+  // modal for movie informations, trailer and poster
   const [ showMovieUploadModal, setShowMovieUploadModal ] = useState(false)
+  // modal for actor information and profile picture
   const [ showActorUploadModal, setShowActorUploadModal ] = useState(false)
 
   const hideMovieUploadModal = () => {
@@ -51,7 +53,9 @@ export default function AdminNavigator({toast}) {
             <Route path="*" element={<NotFound toast={toast} />} />
           </Routes>
         </div>
+        {/* movie modal */}
         <MovieUpload toast={toast} visible={showMovieUploadModal} onClose={hideMovieUploadModal} />
+        {/* actor modal */}
         <ActorUpload toast={toast} visible={showActorUploadModal} onClose={hideActorUploadModal} />
       </div>
     </>

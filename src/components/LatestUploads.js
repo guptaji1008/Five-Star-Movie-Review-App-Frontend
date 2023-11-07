@@ -4,6 +4,8 @@ import { useMovies } from "../hooks";
 
 
 export default function LatestUploads({toast}) {
+
+  // Created a custom hook named "useMovies" for fetching latest uploaded movies, all the movies, related genres movies and many more information about movie
   
   const { recentlyUploadedMovie, latestUpload } = useMovies()
 

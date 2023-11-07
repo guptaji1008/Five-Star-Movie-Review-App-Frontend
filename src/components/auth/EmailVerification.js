@@ -12,8 +12,11 @@ const OTP_LENGTH = 6
 
 export default function EmailVerification({toast}) {
 
+  // creating state of empty array of length 6 :
   const [otp, setOtp] = useState(new Array(OTP_LENGTH).fill(''))
+  // activeOtpIndex is the index no. of focused one :
   const [activeOtpIndex, setActiveOtpIndex] = useState(0)
+  // submitting state busy :
   const [busy, setBusy] = useState(false)
 
   const { isAuth, authInfo } = useAuth()
@@ -46,10 +49,12 @@ useEffect(() => {
     }
   }, [through])
 
+  // creating a function which will increase count of activeOtpIndex
   const focusNextInputField = (index) => {
     setActiveOtpIndex(index + 1)
   }
 
+  // creating a function which will decrease count of activeOtpIndex
   const focusPrevInputField = (index) => {
     if (index === 0) {
       setActiveOtpIndex(0)
@@ -58,17 +63,24 @@ useEffect(() => {
     }
   }
 
+  // This function will handle change in otp array
   const handleOtpChange = ({target}, index) => {
     const {value} = target
+    // only saving last typed number in the particular index
     const newOtpArr = otp.map((elem, ind) => ind === index ? elem = value.substring(value.length-1, value.length) : elem)
     setOtp(newOtpArr)
+    // if no value then giving focus to previous index (like someone give backspace)
     if (!value) focusPrevInputField(index)
     else focusNextInputField(index)
   }
 
-  const handleKeyDown = ({key}, index) => {
-    if (key === "backspace") {
-      focusPrevInputField(index)
+  // This function is handling backspace
+  const handleKeyDown = (e, index) => {
+    const { key, target } = e
+    if (key === "Backspace") {
+      if (target.value) {
+        focusPrevInputField(index + 1)
+      }
     }
   }
 
@@ -88,6 +100,7 @@ useEffect(() => {
       setBusy(false)
       return toast.error("Invalid OTP!")
     }
+    console.log(otp)
     // Submit Otp : 
     const response = await verifyUserEmail({OTP: otp.join(""), userId: user.id})
     setBusy(false)
@@ -106,6 +119,8 @@ useEffect(() => {
     toast.success(message)
 
   }
+
+  // Basically what i have done is , I have used useRef for focus and I have applied condition that if activeOtpIndex matches index then only reference of that input tag is taken and this useEffect below is giving focus to that input tag whenever activeOtpIndex is changes.
 
   useEffect(() => {
     inputRef.current?.focus()

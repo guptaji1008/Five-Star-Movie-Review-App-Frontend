@@ -9,17 +9,24 @@ import AddRatingModal from "../modals/AddRatingModal";
 import ProfileModal from "../modals/ProfileModal";
 
 export default function SingleMovie({toast}) {
+  // creating a ready state :
   const [ready, setReady] = useState(false);
+  // Movie information will be added in this "movie" state
   const [movie, setMovie] = useState({});
+  // creating a state which if true will pop up rating modal
   const [showRatingModal, setShowRatingModal] = useState(false);
+  // creating a state which if true will pop up actor profile modal
   const [showActorProfileModal, setShowActorProfileModal] = useState(false);
+  // selectedProfile is a state in which actor profile information is given
   const [selectedProfile, setSelectedProfile] = useState({});
 
+  // getting movieId from url :
   const { movieId } = useParams();
   const { authInfo } = useAuth();
   const { isLoggedIn } = authInfo;
   const navigate = useNavigate();
 
+  // fetching movie's all information from database using movieId
   const fetchMovie = async (id) => {
     const { movie, error } = await getSingleMovie(id);
     if (error) return toast.error(error);
@@ -29,6 +36,7 @@ export default function SingleMovie({toast}) {
     console.log(movie);
   };
 
+  // Everytime movieId changes, fetchMovie function will work
   useEffect(() => {
     if (movieId) fetchMovie(movieId);
   }, [movieId]);
@@ -61,6 +69,7 @@ export default function SingleMovie({toast}) {
     navigate('/movie/reviews/' + id)
   }
 
+  // if not ready, then we will send "Please Wait" message
   if (!ready) {
     return (
       <div className="h-screen flex justify-center items-center dark:bg-primary bg-white">
@@ -91,7 +100,9 @@ export default function SingleMovie({toast}) {
     <>
       <div className="dark:bg-primary bg-white">
         <Container className="py-5 lg:w-8/12 w-11/12">
+          {/* adding video player for trailer */}
           <video poster={poster} controls src={trailer}></video>
+          {/* rest all the information related to movie like star cast, directors, producers, writers all are mentioned below */}
           <div className="flex justify-between items-center">
             <p className="text-4xl dark:text-gray-200 text-secondary font-semibold">
               {title}
@@ -238,14 +249,17 @@ export default function SingleMovie({toast}) {
           </div>
         </Container>
         <div className="px-16">
+          {/* All the movies which have similar genre (atleast one), that movie will be mentioned here */}
           <RelatedMovies movieId={movieId} toast={toast} />
         </div>
+        {/* this is a pop up modal which will be for rating the movie with the specific id */}
         <AddRatingModal
           toast={toast}
           visible={showRatingModal}
           onClose={() => setShowRatingModal(false)}
           onSuccess={handleRefresher}
         />
+        {/* profile modal is for about actor information with profile picture */}
         <ProfileModal
           visible={showActorProfileModal}
           onClose={() => setShowActorProfileModal(false)}

@@ -17,6 +17,7 @@ export default function MovieReviews({toast}) {
   const [showDeleteMyReviewModal, setShowDeleteMyReviewModal] = useState(false)
   const [busy, setBusy] = useState(false)
 
+  // fetching movie id from url
   const { movieId } = useParams()
   const { authInfo } = useAuth()
   const { profile, isLoggedIn } = authInfo
@@ -38,10 +39,14 @@ export default function MovieReviews({toast}) {
   };
 
   const handleMyReviewButton = () => {
+    // if not logged in then returning to signin page
     if (!isLoggedIn) return navigate('/auth/signin')
+    // applying logic for extracting my review, if there exist my review or else sending message of 'You have not reviewed'
     const [myReview] = reviews.filter((r) => r.owner.ownerId === profile.id)
     if (!myReview) return toast.info("You have not reviewed!")
+    // setting my review
     setMyMovieReview({ ...myReview })
+    // setting modal to true
     setShowMyReviewModal(true)
   }
 

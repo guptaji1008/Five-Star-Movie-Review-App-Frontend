@@ -12,6 +12,7 @@ export default function ForgetPassword({toast}) {
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false)
 
+  // creating function for validation
   const isValidEmail = (email) => {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) return false
     return true
